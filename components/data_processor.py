@@ -9,14 +9,20 @@ class DataProcessor:
     def __init__(self, shapefile_path):
         self.gdf = gpd.read_file(shapefile_path)
         self.gdf['area_km2'] = self.gdf['geometry'].area / 10 ** 6
+
+        categories = self.gdf['TypoCH'].unique()
+        categories_starting_with_6 = [cat for cat in categories if cat.startswith('6')]
+        categories_starting_with_6.sort()
+        categories_str = ', '.join(categories_starting_with_6)
         self.groups = {
-            'forest': ['6', '6.1', '6.2', '6.3', '6.4', '6.5', '6.6'],
+            'forest': ['6', '6.0', '6.2', '6.2.1', '6.2.3', '6.2.4', '6.2.5', '6.3.2', '6.3.3', '6.3.8', '6.4.1', '6.4.2', '6.4.3', '6.6.1', '6.6.2'],
         }
 
     def calculate_total_area(self):
         # Somma dell'area in km^2 per tutti i valori di 'TypoCH'
         total_area = self.gdf['area_km2'].sum()
-        print(total_area)
+
+        print(self.groups)
         return total_area
 
     def calculate_area(self, group):
