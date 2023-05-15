@@ -15,7 +15,8 @@ class DataProcessor:
         categories_starting_with_6.sort()
         categories_str = ', '.join(categories_starting_with_6)
         self.groups = {
-            'forest': ['6', '6.0', '6.2', '6.2.1', '6.2.3', '6.2.4', '6.2.5', '6.3.2', '6.3.3', '6.3.8', '6.4.1', '6.4.2', '6.4.3', '6.6.1', '6.6.2'],
+            'forest': ['6', '6.0', '6.2', '6.2.1', '6.2.3', '6.2.4', '6.2.5', '6.3.2', '6.3.3', '6.3.8', '6.4.1',
+                       '6.4.2', '6.4.3', '6.6.1', '6.6.2'],
         }
 
     def calculate_total_area(self):
@@ -25,7 +26,7 @@ class DataProcessor:
         print(self.groups)
         return total_area
 
-    def calculate_area(self, group):
+    def calculate_specific_area(self, group):
         # Filter data
         filtered_gdf = self.gdf[self.gdf['TypoCH'].isin(group)]
 
@@ -34,5 +35,18 @@ class DataProcessor:
 
         return total_area
 
+    def calculate_area_percentage(self, group):
+        total_area = self.calculate_total_area()
+        forest_area = self.calculate_specific_area(group)
+        print("forest", forest_area)
+        print("total", total_area)
+        forest_percentage = (forest_area / total_area) * 100
+        formatted_percentage = "{:.1f}".format(forest_percentage)
+        print(formatted_percentage)
+        print("forest pouircentage is", formatted_percentage, "%")
+        return forest_percentage
 
-# data_prc = DataProcessor(file_path).calculate_total_area()
+
+# data_prc_forest = DataProcessor(file_path).groups['forest']
+# print(data_prc_forest)
+# data_prc = DataProcessor(file_path).calculate_area_percentage(data_prc_forest)
