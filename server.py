@@ -12,17 +12,17 @@ data_processor = DataProcessor(habitat_path)
 @app.route('/area/<group>')
 def calculate_specific_area(group):
     """
-        Calculate the specific area for a given group.
+    Calculate the specific area for a given group.
 
-        Parameters:
-        - group (str): The group for which to calculate the area.
+    Parameters:
+    - group (str): The group for which to calculate the area.
 
-        Returns:
-        - str: The calculated area.
-        """
+    Returns:
+    - str: The calculated area.
+    """
     if group in data_processor.groups:
         specific_area = data_processor.calculate_specific_area(data_processor.groups[group])
-        return str(specific_area)
+        return "{:.2f}".format(specific_area)
     else:
         return f"Group '{group}' not found."
 
@@ -30,7 +30,7 @@ def calculate_specific_area(group):
 @app.route('/area')
 def calculate_total_area():
     total_area = data_processor.calculate_total_area()
-    return str(total_area)
+    return "{:.2f}".format(total_area)
 
 
 @app.route('/percentage/<group>')
