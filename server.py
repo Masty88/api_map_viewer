@@ -7,6 +7,7 @@ habitat_path = 'data/raw/habitat.shp'
 
 # Initialize data_processor
 data_processor = DataProcessor(habitat_path)
+tree_count = "10706"
 
 
 @app.route('/area/<group>')
@@ -42,6 +43,7 @@ def calculate_percentage(group):
     else:
         return f"Group '{group}' not found."
 
+
 @app.route('/trees')
 def get_tree_count():
     """
@@ -50,9 +52,8 @@ def get_tree_count():
     Returns:
     - str: The calculated tree count.
     """
-    with open('tree_count.csv', 'r') as file:
-        tree_count = file.read()
     return tree_count
+
 
 if __name__ == '__main__':
     print("SERVER RUNNING")

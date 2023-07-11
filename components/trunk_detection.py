@@ -9,7 +9,7 @@ import time
 import pandas as pd
 
 # Carica il file LAS
-las_file = laspy.read("../data/raw/2554_1200.las")
+las_file = laspy.read("../data/raw/2546_1200.las")
 
 # Ottieni le coordinate X, Y e Z di tutti i punti
 x_coordinates = las_file.x
