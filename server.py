@@ -1,7 +1,9 @@
 from flask import Flask
 from components.data_processor import DataProcessor
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 
 habitat_path = 'data/raw/habitat.shp'
 
